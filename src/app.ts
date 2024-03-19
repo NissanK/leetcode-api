@@ -1,21 +1,12 @@
 import express, { NextFunction, Response } from 'express';
 import cors from 'cors';
-import rateLimit from 'express-rate-limit';
 import * as leetcode from './leetCode';
 import { FetchUserDataRequest } from './types';
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 hour
-  limit: 60,
-  standardHeaders: 'draft-7',
-  legacyHeaders: false,
-  message: 'Too many request from this IP, try again in 1 hour',
-});
 
 app.use(cors()); //enable all CORS request
-app.use(limiter); //limit to all API
 
 app.get('/', (_req, res) => {
   res.json({
